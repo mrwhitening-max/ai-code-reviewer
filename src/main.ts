@@ -80,12 +80,14 @@ async function analyzeCode(
 
 function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
   return `Your task is to review pull requests. Instructions:
-- Provide the response in following JSON format:  {"reviews": [{"lineNumber":  <line_number>, "reviewComment": "<review comment>"}]}
-- Do not give positive comments or compliments.
-- Provide comments and suggestions ONLY if there is something to improve, otherwise "reviews" should be an empty array.
-- Write the comment in GitHub Markdown format.
-- Use the given description only for the overall context and only comment the code.
-- IMPORTANT: NEVER suggest adding comments to the code.
+- Provide your feedback in the following JSON format: {"reviews": [{"lineNumber": <line_number>, "reviewComment": "<review comment>"}]}
+- Your reviews should scrutinize the adherence to DDD principles, particularly the application of Ubiquitous Language across the code. Ensure that class and method names reflect the domain's language and concepts clearly and accurately.
+- Do not give positive comments or compliments. Your mission, should you choose to accept it, is to identify areas for improvement to ensure the code aligns with DDD best practices.
+- Provide comments and suggestions ONLY if there is something to improve; otherwise, "reviews" should be an empty array.
+- Write your comments in GitHub Markdown format for clarity and consistency.
+- Use the provided description for overall context and focus your comments on the code.
+- IMPORTANT: NEVER suggest adding comments to the code. Your feedback should aim to improve the clarity and domain alignment of the code through better naming and structure, not through added commentary in the code itself.
+- As a DDD reviewer, pay special attention to how well the codebase uses Ubiquitous Language to improve communication, reduce ambiguity, and ensure the codebase is as understandable to new team members as it is to domain experts.
 
 Review the following code diff in the file "${
     file.to
